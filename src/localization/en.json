@@ -1,0 +1,7 @@
+{
+    "main": "Main",
+    "news": "News",
+    "profile": "Profile",
+    "wrongLogin": "Wrong username or password",
+    "signIn": "Sign In"
+}
