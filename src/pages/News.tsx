@@ -1,6 +1,6 @@
-import { FC, useEffect } from "react";
+import { FC, useCallback, useEffect, useState } from "react";
 import { Button, CircularProgress, Container, Grid } from "@mui/material";
-import { getAllNews, newsSelector } from "../store/reducers/news";
+import { clearNews, getAllNews, newsSelector } from "../store/reducers/news";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { NewsItem } from "../components/ui/NewsItem";
 import { useTranslation } from "react-i18next";
@@ -8,31 +8,47 @@ import { useTranslation } from "react-i18next";
 type Props = {};
 
 export const News: FC<Props> = () => {
+  const [page, setPage] = useState<number>(1);
   const { news, loader } = useAppSelector(newsSelector);
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
+
+  const changePageNumber = useCallback(
+    () => {
+      setPage((prev) => prev + 1);
+    },
+    []
+  );
+
   useEffect(() => {
-    dispatch(getAllNews());
-  }, []);
+    if(page === 1){
+      dispatch(clearNews());
+    }
+    dispatch(getAllNews(page));
+  }, [page, dispatch]);
 
   return (
     <Container
       sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
     >
-      {loader ? (
-        <CircularProgress color="secondary" />
-      ) : (
+      {news.length > 0 && (
         <>
           <Grid container spacing={2}>
             {news.map((post: INews) => {
-              return <NewsItem post={post} />;
+              return <NewsItem key={Math.random()} post={post} />;
             })}
           </Grid>
-          <Button sx={{ marginTop: 2 }} variant="contained" color="secondary">
+          <Button
+            onClick={changePageNumber}
+            sx={{ marginTop: 2, marginBottom: 2 }}
+            variant="contained"
+            color="secondary"
+          >
             {t("loadMore")}
           </Button>
         </>
       )}
+      {loader && <CircularProgress color="secondary" />}
     </Container>
   );
 };

@@ -98,7 +98,7 @@ export const Login: FC<Props> = () => {
             </Alert>
           )}
         </Box>
-        {loader && <CircularProgress color="secondary" />}
+        {loader && <CircularProgress sx={{marginTop: 2}} color="secondary" />}
       </Box>
     </Container>
   );

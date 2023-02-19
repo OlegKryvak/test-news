@@ -11,7 +11,7 @@ export const NewsItem: FC<Props> = ({ post }) => {
   const { t } = useTranslation();
 
   return (
-    <Grid item xs={12} md={6} sx={{ aspectRatio: 1 }}>
+    <Grid item xl={4} xs={12} md={6} sx={{ aspectRatio: 1 }}>
       <Card
         elevation={6}
         key={post.title}
@@ -29,7 +29,7 @@ export const NewsItem: FC<Props> = ({ post }) => {
           />
           <Stack direction="column" alignItems="center" spacing={2}>
             <Typography
-              minHeight={100}
+              height={150}
               textAlign="center"
               sx={{ width: "90%" }}
               component="h2"
@@ -38,6 +38,7 @@ export const NewsItem: FC<Props> = ({ post }) => {
               {post.title}
             </Typography>
             <Typography
+              height={80}
               textAlign="center"
               sx={{ width: "80%" }}
               component="span"
