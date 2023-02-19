@@ -3,5 +3,7 @@
     "news": "News",
     "profile": "Profile",
     "wrongLogin": "Wrong username or password",
-    "signIn": "Sign In"
+    "signIn": "Sign In",
+    "more": "More Info",
+    "loadMore": "Load More"
 }

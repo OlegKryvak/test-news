@@ -108,9 +108,7 @@ export const Layout: FC<Props> = ({ children }) => {
           </ToggleButton>
         </ToggleButtonGroup>
       </AppBar>
-      <main>
-        <Container sx={{ paddingTop: 10 }}>{children}</Container>
-      </main>
+        <Container component="main" sx={{ paddingTop: 10, paddingBottom: 10 }}>{children}</Container>
     </ThemeProvider>
   );
 };
