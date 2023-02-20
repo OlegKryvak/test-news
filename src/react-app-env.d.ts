@@ -2,10 +2,8 @@
 
 interface INews {
     title: string;
-    urlToImage: string;
     author: string;
-    content: string;
+    id: number;
     description: string;
-    publishedAt: string;
-    url: string;
+    img: string;
 }

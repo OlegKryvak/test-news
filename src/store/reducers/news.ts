@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios, { AxiosResponse } from "axios";
-import { API_KEY, PAGE_SIZE } from "../../utils/constants";
+import { PAGE_SIZE } from "../../utils/constants";
 import { RootState } from "../hooks";
 
 interface IState {
@@ -8,9 +8,12 @@ interface IState {
   loader: boolean;
 }
 interface IAllNews {
-  status: string;
-  totalResults: number;
-  articles: Array<any>;
+  data: INews[];
+  config: any;
+  headers: any;
+  request: any;
+  status: any;
+  statusText: any;
 }
 
 const initialState: IState = { loader: false, news: [] };
@@ -19,9 +22,20 @@ export const getAllNews = createAsyncThunk(
   "news/getAllNews",
   async (page: number) => {
     const response: AxiosResponse<IAllNews> = await axios.get(
-      `https://newsapi.org/v2/top-headlines?category=business&language=en&apiKey=${API_KEY}&pageSize=${PAGE_SIZE}&page=${page}`
+      `https://mockend.com/OlegKryvak/test-news/news?offset=${
+        page * PAGE_SIZE - PAGE_SIZE
+      }&limit=12`
     );
-    return response.data.articles;
+    return response.data;
+  }
+);
+export const deleteNews = createAsyncThunk(
+  "news/deleteNews",
+  async (id: number) => {
+    const response: AxiosResponse<IAllNews> = await axios.delete(
+      `https://mockend.com/OlegKryvak/test-news/news/:${id}`
+    );
+    return { data: response.data, id };
   }
 );
 
@@ -34,12 +48,18 @@ const newsSlice = createSlice({
     },
   },
   extraReducers(builder) {
-    builder.addCase(getAllNews.pending, (state, action) => {
+    builder.addCase(getAllNews.pending, (state) => {
       state.loader = true;
     });
     builder.addCase(getAllNews.fulfilled, (state, action) => {
-      state.news = [...state.news, ...action.payload];
+      state.news = state.news.concat(action.payload);
       state.loader = false;
+    });
+    builder.addCase(deleteNews.pending, (state) => {
+      
+    });
+    builder.addCase(deleteNews.fulfilled, (state, action) => {
+      state.news = state.news.filter((item: INews)=>item.id !== action.payload.id)
     });
   },
 });

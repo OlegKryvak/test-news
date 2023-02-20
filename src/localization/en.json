@@ -5,5 +5,8 @@
     "wrongLogin": "Wrong username or password",
     "signIn": "Sign In",
     "more": "More Info",
-    "loadMore": "Load More"
+    "loadMore": "Load More",
+    "confirmDelete": "Confirm delete",
+    "yes": "Yes",
+    "no": "No"
 }
