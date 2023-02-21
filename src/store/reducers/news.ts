@@ -55,11 +55,12 @@ const newsSlice = createSlice({
       state.news = state.news.concat(action.payload);
       state.loader = false;
     });
-    builder.addCase(deleteNews.pending, (state) => {
-      
+    builder.addCase(deleteNews.pending, () => {
     });
     builder.addCase(deleteNews.fulfilled, (state, action) => {
-      state.news = state.news.filter((item: INews)=>item.id !== action.payload.id)
+      state.news = state.news.filter(
+        (item: INews) => item.id !== action.payload.id
+      );
     });
   },
 });

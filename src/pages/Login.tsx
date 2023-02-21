@@ -46,6 +46,7 @@ export const Login: FC<Props> = () => {
   useLayoutEffect(() => {
     dispatch(setLoader(false));
   }, [dispatch]);
+  
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />

@@ -2,7 +2,7 @@ import { FC, useCallback, useEffect, useState } from "react";
 import { Button, CircularProgress, Container, Grid } from "@mui/material";
 import { clearNews, getAllNews, newsSelector } from "../store/reducers/news";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { NewsItem } from "../components/ui/NewsItem";
+import  NewsItem  from "../components/ui/NewsItem";
 import { useTranslation } from "react-i18next";
 
 type Props = {};

@@ -8,8 +8,8 @@ import ToggleButton from "@mui/material/ToggleButton";
 import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from '@mui/icons-material/Logout';
 import AppBar from "@mui/material/AppBar";
-import { activeNavStyle, unActiveNavStyle } from "../../utils/styles";
 import { signout } from "../../utils/functions";
+import { activeNavStyle, unActiveNavStyle } from "../../styles";
 import { useAuth } from "../../hooks/auth";
 
 interface Props {
@@ -49,6 +49,7 @@ export const Layout: FC<Props> = ({ children }) => {
         color="primary"
         elevation={10}
         sx={{
+          height: 61,
           padding: "0 40px",
           display: "flex",
           flexDirection: "row",

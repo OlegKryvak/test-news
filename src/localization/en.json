@@ -8,5 +8,14 @@
     "loadMore": "Load More",
     "confirmDelete": "Confirm delete",
     "yes": "Yes",
-    "no": "No"
+    "no": "No",
+    "title": "Title",
+    "description": "Description",
+    "author": "Author",
+    "username": "Username",
+    "firstName": "Name",
+    "lastName": "Surname",
+    "age": "Age",
+    "oleg": "Oleg",
+    "kryvak": "Kryvak"
 }

@@ -8,5 +8,14 @@
     "loadMore": "Загрузити ще",
     "confirmDelete": "Підтвердити видалення",
     "yes": "Так",
-    "no": "Ні"
+    "no": "Ні",
+    "title": "Заголовок",
+    "description": "Опис",
+    "author": "Автор",
+    "username": "Ім'я юзера",
+    "firstName": "Ім'я",
+    "lastName": "Прізвище",
+    "age": "Вік",
+    "oleg": "Олег",
+    "kryvak": "Кривак"
 }

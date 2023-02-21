@@ -1,33 +1,28 @@
-import { FC, useCallback, useState } from "react";
-import {
-  Box,
-  Button,
-  Card,
-  Grid,
-  Modal,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { FC, memo, useCallback, useState } from "react";
+import { Button, Card, Grid, Stack, Typography } from "@mui/material";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import { useTranslation } from "react-i18next";
 import { deleteNews } from "../../store/reducers/news";
 import { useAppDispatch } from "../../store/hooks";
-import { modalStyle } from "../../styles";
+import { ModalDelete } from "./Modal";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   post: INews;
 };
-
-export const NewsItem: FC<Props> = ({ post }) => {
+ const NewsItem: FC<Props> = ({ post }) => {
   const { id, title, description, img, author } = post;
   const [open, setOpen] = useState<boolean>(false);
   const handleOpen = useCallback(() => setOpen(true), []);
   const handleClose = useCallback(() => setOpen(false), []);
   const dispatch = useAppDispatch();
-  const { t } = useTranslation();
-  const deleteNewsHandler = useCallback((id: number): void => {
-    dispatch(deleteNews(id));
-  }, [dispatch]);
+  const {t} = useTranslation()
+
+  const deleteNewsHandler = useCallback(
+    (id: number): void => {
+      dispatch(deleteNews(id));
+    },
+    [dispatch]
+  );
 
   return (
     <Grid item xl={4} xs={12} md={6} sx={{ aspectRatio: 1 }}>
@@ -36,7 +31,8 @@ export const NewsItem: FC<Props> = ({ post }) => {
         key={title}
         sx={{
           boxSizing: "border-box",
-          padding: 1,
+          paddingX: 1,
+          paddingY: 2,
           aspectRatio: 1,
         }}
       >
@@ -47,64 +43,44 @@ export const NewsItem: FC<Props> = ({ post }) => {
             alt={title}
           />
           <Stack direction="column" alignItems="center" spacing={2}>
-            <Typography
-              textAlign="center"
-              sx={{ width: "90%" }}
-              component="h2"
-              variant="h6"
-            >
-              {title}
-            </Typography>
-            <Typography
-              textAlign="center"
-              sx={{ width: "80%" }}
-              component="span"
-              variant="body2"
-            >
-              {description.slice(0, 100)}...
-            </Typography>
-            <Typography
-              textAlign="center"
-              sx={{ width: "80%" }}
-              component="span"
-              variant="body2"
-            >
-              {author}
-            </Typography>
+            <Stack direction="row" spacing={2} alignItems="center">
+              <Typography textAlign="center" component="h2" variant="h5">
+                {t('title')}
+              </Typography>
+              <Typography textAlign="center" component="h2" variant="h6">
+                {title}
+              </Typography>
+            </Stack>
+            <Stack direction="row" spacing={2} alignItems="center">
+              <Typography textAlign="center" component="span" variant="h6">
+                {t('description')}
+              </Typography>
+              <Typography textAlign="center" component="span" variant="body2">
+                {description}
+              </Typography>
+            </Stack>
+            <Stack direction="row" spacing={2} alignItems="center">
+              <Typography textAlign="center" component="span" variant="h6">
+                {t('author')}
+              </Typography>
+              <Typography textAlign="center" component="span" variant="body2">
+                {author}
+              </Typography>
+            </Stack>
+
             <Button onClick={handleOpen} variant="contained" color="inherit">
               <DeleteForeverIcon color="error" />
             </Button>
           </Stack>
         </Stack>
       </Card>
-      <Modal
+      <ModalDelete
         open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={modalStyle}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            {t("confirmDelete")}
-          </Typography>
-          <Stack direction="row" spacing={2}>
-            <Button
-              onClick={() => handleClose()}
-              variant="contained"
-              color="error"
-            >
-              {t("no")}
-            </Button>
-            <Button
-              onClick={() => deleteNewsHandler(id)}
-              variant="contained"
-              color="success"
-            >
-              {t("yes")}
-            </Button>
-          </Stack>
-        </Box>
-      </Modal>
+        handleClose={handleClose}
+        deletePost={() => deleteNewsHandler(id)}
+      />
     </Grid>
   );
 };
+
+export default memo(NewsItem);

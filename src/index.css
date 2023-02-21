@@ -9,7 +9,8 @@ body {
 }
 a{
   text-decoration: none;
-  color: white
+  color: white;
+  box-sizing: content-box;
 }
 
 code {
