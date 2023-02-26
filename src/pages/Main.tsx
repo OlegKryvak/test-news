@@ -60,7 +60,7 @@ export const Main: FC<Props> = () => {
         })
       );
     }
-  }, [from, to, amount, date]);
+  }, [from, to, amount, date, dispatch]);
 
   return (
     <Container>

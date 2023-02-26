@@ -27,9 +27,6 @@ export const deleteNews = createAsyncThunk(
     const response: AxiosResponse<IAllNewsResponse> = await axios.delete(
       `https://mockend.com/OlegKryvak/test-news/news/:${id}`
     );
-    console.log(response);
-    console.log(id);
-    
     return { data: response.data, id };
   }
 );
@@ -50,8 +47,7 @@ const newsSlice = createSlice({
       state.news = state.news.concat(action.payload);
       state.loader = false;
     });
-    builder.addCase(deleteNews.pending, () => {
-    });
+    builder.addCase(deleteNews.pending, () => {});
     builder.addCase(deleteNews.fulfilled, (state, action) => {
       state.news = state.news.filter(
         (item: INews) => item.id !== action.payload.id
