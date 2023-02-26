@@ -7,21 +7,13 @@ interface IState {
   news: any;
   loader: boolean;
 }
-interface IAllNews {
-  data: INews[];
-  config: any;
-  headers: any;
-  request: any;
-  status: any;
-  statusText: any;
-}
 
 const initialState: IState = { loader: false, news: [] };
 
 export const getAllNews = createAsyncThunk(
   "news/getAllNews",
   async (page: number) => {
-    const response: AxiosResponse<IAllNews> = await axios.get(
+    const response: AxiosResponse<IAllNewsResponse> = await axios.get(
       `https://mockend.com/OlegKryvak/test-news/news?offset=${
         page * PAGE_SIZE - PAGE_SIZE
       }&limit=12`
@@ -32,9 +24,12 @@ export const getAllNews = createAsyncThunk(
 export const deleteNews = createAsyncThunk(
   "news/deleteNews",
   async (id: number) => {
-    const response: AxiosResponse<IAllNews> = await axios.delete(
+    const response: AxiosResponse<IAllNewsResponse> = await axios.delete(
       `https://mockend.com/OlegKryvak/test-news/news/:${id}`
     );
+    console.log(response);
+    console.log(id);
+    
     return { data: response.data, id };
   }
 );
