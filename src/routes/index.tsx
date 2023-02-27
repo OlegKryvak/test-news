@@ -12,7 +12,7 @@ const RequireAuth = ({ children }: { children: JSX.Element }) => {
   return auth ? (
     children
   ) : (
-    <Navigate to="/" state={{ from: location }} replace />
+    <Navigate to="/test-news" state={{ from: location }} replace />
   );
 };
 
