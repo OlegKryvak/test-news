@@ -19,7 +19,7 @@ const RequireAuth = ({ children }: { children: JSX.Element }) => {
 export const Navigation: FC = () => {
   return (
       <Routes>
-        <Route path="/" element={<Main />} />
+        <Route path="/test-news" element={<Main />} />
         <Route path="/login" element={<Login />} />
         <Route path="/news" element={<News />} />
         <Route

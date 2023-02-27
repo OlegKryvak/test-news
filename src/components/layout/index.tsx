@@ -72,7 +72,7 @@ export const Layout: FC<Props> = ({ children }) => {
               style={({ isActive }) =>
                 isActive ? activeNavStyle : unActiveNavStyle
               }
-              to="/"
+              to="/test-news"
             >
               {t("main")}
             </NavLink>
